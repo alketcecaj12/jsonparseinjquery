@@ -1,0 +1,66 @@
+<!-- Vuejs Course -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vuejs Course</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="col-sm-12">
+            <h1>choose your random persons</h1>
+            <input v-model="search">
+        </div>
+        <div class="col-sm-6">
+            
+            <div v-for="name in diplay_name | filterBy search"><img :src=".picture.thumbnail" />{{ person.name.first }} {{ person.name.last }}
+                <button type="button" @click="addPerson(person)">add</button>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h1>Persons added</h1>
+            <div v-for="person in  selectedpeople "><img :src="person.picture.thumbnail" />{{ person.name.first }} {{ person.name.last }}
+                <button type="button" @click="removePerson(person)">Remove</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/0.9.3/vue-resource.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                display_name: [],
+                category: null,
+                search: ''
+            },
+            created: function () {
+                this.getData();
+            },
+            methods: {
+                getData: function () {
+                    this.$http.get('https://api.myjson.com/bins/woktb').then((response) => {
+                        this.display_name = response.json().results;
+                    }, (response) => {
+                        // error callback
+                    });
+
+                },
+                addPerson: function (e) {
+                    this.selectedpeople.push(e);
+                },
+                removePerson: function (e) {
+                    this.selectedpeople.$remove(e);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

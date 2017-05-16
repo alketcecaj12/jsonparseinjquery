@@ -1,0 +1,77 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript API Tutorials</title>
+		<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
+		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+      <script src="js.js"></script>
+    </head>    
+    <body>
+
+	
+	 <div class="ui-input-btn ui-btn ui-corner-all ui-shadow ui-mini">Musei
+        <input id = "musei" type="button" data-enhanced="true" value="Input value">
+    </div>
+	 <div class="ui-input-btn ui-btn ui-corner-all ui-shadow ui-mini">Parchi
+        <input id = "parchi" type="button" data-enhanced="true" value="Input value">
+    </div>
+	 <div class="ui-input-btn ui-btn ui-corner-all ui-shadow ui-mini">Attrazioni
+        <input id = "attrazioni" type="button" data-enhanced="true" value="Input value">
+    </div>
+	 <div class="ui-input-btn ui-btn ui-corner-all ui-shadow ui-mini">Monumenti
+        <input id = "monumenti" type="button" data-enhanced="true" value="Input value">
+    </div>
+	 <div class="ui-input-btn ui-btn ui-corner-all ui-shadow ui-mini">Luoghi religiosi
+        <input id = "religious" type="button" data-enhanced="true" value="Input value">
+    </div>
+	 <div class="ui-input-btn ui-btn ui-corner-all ui-shadow ui-mini">Luoghi storici
+        <input id = "historical" type="button" data-enhanced="true" value="Input value">
+    </div>
+	
+<div id="results">
+<b>Results</b><br>
+<br>
+<br>
+</div>
+<div id="data">
+<b>Data</b><br>
+</div>
+<br>
+<br>
+
+       
+        <script>
+ 	 $(document).ready(function() {
+	   $("#musei").click(function () {
+          window.location = 'museilist.html';
+	   });
+     }); 
+ $(document).ready(function() {
+	   $("#parchi").click(function () {
+          window.location = 'parchilist.html';
+	   });
+     }); 
+ $(document).ready(function() {
+	   $("#attrazioni").click(function () {
+          window.location = 'attrazionilist.html';
+	   });
+     }); 
+ $(document).ready(function() {
+	   $("#historical").click(function () {
+          window.location= 'historiclist.html';
+	   });
+     }); 
+ $(document).ready(function() {
+	   $("#religious").click(function () {
+          window.location = 'religiouslist.html';
+	   });
+     }); 
+ $(document).ready(function() {
+	   $("#monumenti").click(function () {
+          window.location = 'monumentilist.html';
+	   });
+     });	 
+        </script>
+    </body>
+</html>

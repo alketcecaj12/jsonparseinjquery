@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Javascript API Tutorials</title>
+      <script src="js.js"></script>
+    </head>    
+    
+    <body>
+        
+        <div id = "output"></div>
+
+       
+        <script>
+      
+        var output = document.getElementById("output");
+            
+           var marker_art = new Array();
+           var marker_museum = new Array();   
+            
+            function myFunction(){
+                var jsonoutput = '';
+                if (this.readyState == 4 && this.status == 200){
+                    var json = JSON.parse(this.responseText);
+                    
+                    //window.sessionStorage.setItem('response', JSON.stringify(json));
+                    for(var a in json){
+                        var tipocat = json[a].type;
+                        
+                        if(tipocat=='artwork') {
+                           storeCoordinate(json[a].geometry.coordinates[0], json[a].geometry.coordinates[1], marker_art);
+                                               }
+                        else if(tipocat == 'arts_centre'||tipocat == 'museum' ) {
+                            storeCoordinate(json[a].geometry.coordinates[0], json[a].geometry.coordinates[1], marker_museum);
+                        }
+                       // console.log("art -->  "+marker_art.length);
+                        //console.log("museum -->  "+marker_museum.length);
+                        
+                        jsonoutput = jsonoutput +",<li>"+json[a].geometry.coordinates[0]+" : "+ json[a].geometry.coordinates[1]+": "+json[a].category+","+json[a].type+"</li> <br>";
+                    }
+                  
+                    output.innerHTML = jsonoutput;
+                    console.log( window.sessionStorage.getItem('response', json));
+                //window.location.href = "index.html";
+                }
+                    
+            }
+            var myRequest = new XMLHttpRequest();
+            myRequest.onreadystatechange = myFunction;
+            myRequest.open("GET", "jsonlocal/modena.json");
+           // myRequest.open("GET", "https://api.myjson.com/bins/woktb");
+            myRequest.send();
+            
+         
+            
+           
+        </script>
+    </body>
+</html>

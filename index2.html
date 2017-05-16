@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Javascript API Tutorials</title>
+    </head>
+    
+    
+    <body>
+        
+        <div id = "output"></div>
+        <div id = "output2"></div>
+        <div id = "output3"></div>
+        <script>
+        var output = document.getElementById("output");
+        var myjson = '{"one": "my value output"}';
+        
+        var parsedjson = JSON.parse(myjson);
+        console.log(parsedjson);        
+        
+            
+         
+            
+        // turns "my value output" as JSON is parsed    
+        output.innerHTML = parsedjson.one; 
+        
+        // turns the JSON object as a string 
+        output2.innerHTML = JSON.stringify(parsedjson);
+          
+        // turns undefined as the JSON is not parsed yet
+        output3.innerHTML = output.one;  
+        
+        </script>
+    </body>
+</html>

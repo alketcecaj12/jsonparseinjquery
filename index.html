@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    
+   <head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Leaflet</title>
+    <!-- Bootstrap core CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+     <link rel="stylesheet" href="css/leaflet.css" />
+	 <link rel="stylesheet" href="css/map.css" />
+     <script src="lib/leaflet.js"></script>
+	 <script src="js.js"></script>
+    
+    </head>
+    
+	<body>
+       <div id="map" style="width: 715px; height: 375px"></div>
+	<div id = "butt">
+	<p>here </p><br>
+	<p>here </p><br>
+
+	<button type="button" onClick = placeTheMarks()>Place The Marks!</button>
+	</div>
+	<!-- Add the Leaflet JavaScript library -->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	   <script>
+	   
+        var output = document.getElementById("out"); 
+     function placeTheMarks(){       
+
+	   var json = JSON.parse(window.sessionStorage.getItem('response'));
+		console.log(json);
+		 var marker_art = new Array();
+         var marker_museum = new Array();   
+		for(var a in json){
+		    var tipocat = json[a].type; 
+			
+            if(tipocat=='artwork') {
+                storeCoordinate(json[a].geometry.coordinates[0], json[a].geometry.coordinates[1], marker_art);
+            }
+            else if(tipocat == 'arts_centre'||tipocat == 'museum' ) {
+                storeCoordinate(json[a].geometry.coordinates[0], json[a].geometry.coordinates[1], marker_museum);
+            }
+		}
+		var marker_array = []; 
+		for (var i = 0; i < marker_art.length; i++) {
+          var x = marker_art[i].x;
+          var y = marker_art[i].y;
+		  var arr = [y,x];
+		  marker_array.push(arr);
+	     
+        }
+		     for(var i = 0; i < marker_array.length-1; i++){
+	               new L.marker(marker_array[i]).addTo(map);
+			 }
+        }
+		
+		var map = L.map('map').setView([44.7215826, 10.624086], 12);
+
+         L.tileLayer("http://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+	        attribution: 'Map data&copy; OpenStreetMap contributors'
+           }).addTo(map);
+		
+        </script>
+		 </body>
+</html>

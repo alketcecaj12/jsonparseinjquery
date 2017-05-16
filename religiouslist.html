@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript API Tutorials</title>
+		<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
+		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+      <script src="js.js"></script>
+    </head>    
+    <body>
+<div id="results">
+<b>Results</b><br>
+<br>
+<br>
+</div>
+<div id="data">
+<b>Data</b><br>
+</div>
+<br>
+<br>
+
+       
+        <script>
+ 	 $(document).ready(function() {
+	
+         $.getJSON("jsonlocal/modena.json", function(data) {
+       //$.getJSON("https://api.myjson.com/bins/woktb",function(data){
+             
+             list = '<form id="arrayCreator">';
+             list = list + '<input  type="submit" value="Invia">';
+             $.each(data, function(index, element) {
+               var cat =  element.category;
+			 console.log('cat = '+cat);
+			   if(cat === 'religious_sites'){
+				 var partsOfStr = element.display_name.split(',');
+                
+				 list = list +'<label><input type="checkbox" name="checkbox-0" value = "'+partsOfStr[0]+', ' 
+				 + element.place_id + '">'+partsOfStr[0] +'</label> <br>';
+				 }
+             });
+			
+             list = list + '</form>';
+             $('#data').append(list);
+			 
+             var arrayFromJson = [];
+             $('#arrayCreator').submit(function(e) {
+                 arrayFromJson = [];
+                 e.preventDefault();
+                 inputs = $("#arrayCreator input[type='checkbox']");
+                 $('#results').html("<b>Results</b><br>");
+                 for (x = 0; x < inputs.length; x++) {
+                     if ($(inputs[x]).is(":checked")) {
+                         arrayFromJson.push(inputs[x].value);
+                     }
+                 }
+                 console.log(arrayFromJson);
+                 for (x = 0; x < arrayFromJson.length; x++) {
+                     $('#results').append("<li>" + JSON.stringify(arrayFromJson[x]) + "</li>" + "<br>");
+                    
+                 }
+             });
+         });
+	
+     
+ });
+
+            
+           
+        </script>
+    </body>
+</html>
